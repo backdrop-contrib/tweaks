@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * This module provides tweaks to enhance the usability and performance of the
+ * website.
+ */
+
+
+/**
+ * Implements hook_menu().
+ */
+function tweaks_menu() {
+
+  $items['admin/config/tweaks'] = array(
+    'title' => 'Tweaks',
+    'description' => 'Enhance the usability and performance.',
+    'position' => 'right',
+    'weight' => 10,
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('access administration pages'),
+    'file' => 'system.admin.inc',
+    'file path' => backdrop_get_path('module', 'system'),
+  );
+
+  return $items;
+}

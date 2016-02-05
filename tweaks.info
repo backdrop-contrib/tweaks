@@ -1,0 +1,5 @@
+name = Tweaks
+description = Provides tweaks to enhance the usability and performance of the website.
+backdrop = 1.x
+package = Tweaks
+type = module

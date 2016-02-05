@@ -1,0 +1,7 @@
+name = Collapse Groups
+description = Allows to collapse groups on the Modules and the Permissions pages.
+backdrop = 1.x
+package = Tweaks
+type = module
+dependencies[] = tweaks
+configure = admin/config/tweaks/collapse-groups

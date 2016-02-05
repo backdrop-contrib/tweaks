@@ -1,0 +1,7 @@
+name = Log Messages
+description = Allows to remove log messages from the database which are older than a specific time.
+backdrop = 1.x
+package = Tweaks
+type = module
+dependencies[] = tweaks
+configure = admin/config/tweaks/log-messages

@@ -1,0 +1,11 @@
+
+/**
+ * Collapse groups on Permissions page.
+ */
+tr.collapse-permissions-page-processed {
+  cursor: pointer;
+  cursor: hand;
+}
+tr.collapse-permissions-page-processed td.module {
+  border-top: 0;
+}

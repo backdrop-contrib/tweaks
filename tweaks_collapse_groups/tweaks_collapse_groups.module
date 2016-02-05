@@ -1,0 +1,70 @@
+<?php
+
+/**
+ * @file
+ * This module allows to collapse groups on the Modules and the Permissions
+ * pages.
+ */
+
+
+/**
+ * Implements hook_menu().
+ */
+function tweaks_collapse_groups_menu() {
+
+  $items['admin/config/tweaks/collapse-groups'] = array(
+    'title' => 'Collapse groups',
+    'description' => 'Allows to collapse groups on the Modules and the Permissions pages.',
+    'page callback' => 'backdrop_get_form',
+    'page arguments' => array('tweaks_collapse_groups_settings'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'tweaks_collapse_groups.admin.inc',
+  );
+
+  return $items;
+}
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function tweaks_collapse_groups_form_system_modules_alter(&$form, &$form_state, $form_id) {
+
+  if (!!config_get('tweaks_collapse_groups.settings', 'collapse_modules_page')) {
+
+    foreach (element_children($form['modules']) as $key) {
+
+      $form['modules'][$key]['#collapsed'] = TRUE;
+    }
+  }
+}
+
+
+/**
+ * Implements hook_init().
+ */
+function tweaks_collapse_groups_init() {
+
+  if (!!config_get('tweaks_collapse_groups.settings', 'collapse_permissions_page')) {
+
+    if (arg(0) == 'admin' && arg(1) == 'config' && arg(2) == 'people' && arg(3) == 'permissions') {
+
+      backdrop_add_css(backdrop_get_path('module', 'tweaks_collapse_groups') . '/css/collapse-groups.css');
+      backdrop_add_js(backdrop_get_path('module', 'tweaks_collapse_groups') . '/js/collapse-groups.js');
+    }
+  }
+}
+
+
+/**
+ * Implements hook_config_info().
+ */
+function tweaks_collapse_groups_config_info() {
+
+  $prefixes['tweaks_collapse_groups.settings'] = array(
+    'label' => t('Collapse Groups settings'),
+    'group' => t('Tweaks'),
+  );
+
+  return $prefixes;
+}
