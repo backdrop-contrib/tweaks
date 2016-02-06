@@ -1,0 +1,7 @@
+name = Modules Weight
+description = Allows to display the modules weight on the Modules page.
+backdrop = 1.x
+package = Tweaks
+type = module
+dependencies[] = tweaks
+configure = admin/config/tweaks/modules-weight

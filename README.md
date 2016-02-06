@@ -9,6 +9,7 @@ includes following features:
 
 - Remove log messages from the database which are older than a specific time.
 
+- Display the modules weight on the Modules page.
 
 Installation
 ------------
