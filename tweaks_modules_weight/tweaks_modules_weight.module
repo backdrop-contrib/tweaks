@@ -1,0 +1,87 @@
+<?php
+
+/**
+ * @file
+ * This module allows to display the modules weight on the Modules page.
+ */
+
+
+/**
+ * Implements hook_menu().
+ */
+function tweaks_modules_weight_menu() {
+
+  $items['admin/config/tweaks/modules-weight'] = array(
+    'title' => 'Modules weight',
+    'description' => 'Allows to display the modules weight on the Modules page.',
+    'page callback' => 'backdrop_get_form',
+    'page arguments' => array('tweaks_modules_weight_settings'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'tweaks_modules_weight.admin.inc',
+  );
+
+  return $items;
+}
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function tweaks_modules_weight_form_system_modules_alter(&$form, &$form_state, $form_id) {
+
+  $config = config_get('tweaks_modules_weight.settings', 'modules_weight');
+
+  if ($config == 'display') {
+
+    $modules = system_rebuild_module_data();
+
+    foreach (element_children($form['modules']) as $package) {
+
+      foreach (element_children($form['modules'][$package]) as $module) {
+
+        // Add weight data.
+        $form['modules'][$package][$module]['weight'] = array(
+          '#markup' => !!$modules[$module]->status ? $modules[$module]->weight : '',
+        );
+      }
+
+      $form['modules'][$package]['#theme'] = 'tweaks_modules_weight_system_modules_fieldset';
+      $form['modules'][$package]['#header'] = array(
+        array('class' => array('checkbox')),
+        t('Name'),
+        array('data' => t('Version'), 'class' => array(RESPONSIVE_PRIORITY_MEDIUM)),
+        array('data' => t('Weight'), 'class' => array(RESPONSIVE_PRIORITY_MEDIUM)),
+        array('data' => t('Description'), 'class' => array(RESPONSIVE_PRIORITY_LOW)),
+        array('data' => t('Operations')),
+      );
+    }
+  }
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function tweaks_modules_weight_theme() {
+
+  $themes['tweaks_modules_weight_system_modules_fieldset'] = array(
+    'render element' => 'form',
+    'file' => 'tweaks_modules_weight.theme.inc',
+  );
+
+  return $themes;
+}
+
+
+/**
+ * Implements hook_config_info().
+ */
+function tweaks_modules_weight_config_info() {
+
+  $prefixes['tweaks_modules_weight.settings'] = array(
+    'label' => t('Modules Weight settings'),
+    'group' => t('Tweaks'),
+  );
+
+  return $prefixes;
+}
