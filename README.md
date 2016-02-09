@@ -7,9 +7,11 @@ includes following features:
 
 - Collapse groups on the Modules and the Permissions pages.
 
-- Remove log messages from the database which are older than a specific time.
+- Define the path of the language links of the Language Switcher block.
 
 - Display the modules weight on the Modules page.
+
+- Remove log messages from the database which are older than a specific time.
 
 Installation
 ------------
