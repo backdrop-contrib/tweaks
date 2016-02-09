@@ -1,0 +1,8 @@
+name = Language Switcher
+description = Allows to define the path of the language links of the Language Switcher block.
+backdrop = 1.x
+package = Tweaks
+type = module
+dependencies[] = tweaks
+dependencies[] = locale
+configure = admin/config/tweaks/language-switcher

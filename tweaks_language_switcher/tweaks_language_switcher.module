@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * @file
+ * This module allows to define the path of the language links of the Language Switcher block.
+ */
+
+
+/**
+ * Implements hook_menu().
+ */
+function tweaks_language_switcher_menu() {
+
+  $items['admin/config/tweaks/language-switcher'] = array(
+    'title' => 'Language switcher',
+    'description' => 'Allows to define the path of the language links of the Language Switcher block.',
+    'page callback' => 'backdrop_get_form',
+    'page arguments' => array('tweaks_language_switcher_settings'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'tweaks_language_switcher.admin.inc',
+  );
+
+  return $items;
+}
+
+
+/**
+ * Implements hook_block_view_alter().
+ */
+function tweaks_language_switcher_block_view_alter(&$data, $block, $settings = array(), $contexts = array()) {
+
+  if ($block->module == 'locale' && language_multilingual()) {
+
+    if (config_get('tweaks_language_switcher.settings', 'path') == 'front') {
+
+      $links = language_negotiation_get_switch_links($block->delta, '<front>');
+
+      if (isset($links->links)) {
+
+        $class = "language-switcher-{$links->provider}";
+        $variables = array('links' => $links->links, 'attributes' => array('class' => array($class)));
+
+        $data['content'] = theme('links__locale_block', $variables);
+      }
+    }
+  }
+}
+
+
+/**
+ * Implements hook_config_info().
+ */
+function tweaks_language_switcher_config_info() {
+
+  $prefixes['tweaks_language_switcher.settings'] = array(
+    'label' => t('Language Switcher settings'),
+    'group' => t('Tweaks'),
+  );
+
+  return $prefixes;
+}
