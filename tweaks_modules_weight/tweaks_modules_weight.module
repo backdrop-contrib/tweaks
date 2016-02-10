@@ -51,7 +51,7 @@ function tweaks_modules_weight_form_system_modules_alter(&$form, &$form_state, $
       $header = $form['modules'][$package]['#header'];
       $form['modules'][$package]['#header'] = array_merge(
         array_slice($header, 0, 3),
-        array('data' => t('Weight'), 'class' => array(RESPONSIVE_PRIORITY_MEDIUM)),
+        array(array('data' => t('Weight'), 'class' => array(RESPONSIVE_PRIORITY_MEDIUM))),
         array_slice($header, 3)
       );
     }
