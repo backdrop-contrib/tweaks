@@ -28,7 +28,7 @@ function tweaks_log_messages_menu() {
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function tweaks_module_groups_form_dblog_clear_log_form_alter(&$form, &$form_state, $form_id) {
+function tweaks_log_messages_form_dblog_clear_log_form_alter(&$form, &$form_state, $form_id) {
 
   if (!config_get('tweaks_log_messages.settings', 'clear_log_form')) {
 
