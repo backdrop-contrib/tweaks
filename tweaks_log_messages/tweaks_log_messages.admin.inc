@@ -7,7 +7,7 @@
 
 
 /**
- * Form builder; The log messages form.
+ * Form builder; The log messages settings form.
  */
 function tweaks_log_messages_settings($form, $form_state) {
 

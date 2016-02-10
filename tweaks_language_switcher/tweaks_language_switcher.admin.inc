@@ -7,7 +7,7 @@
 
 
 /**
- * Form builder; The language switcher form.
+ * Form builder; The language switcher settings form.
  */
 function tweaks_language_switcher_settings($form, $form_state) {
 

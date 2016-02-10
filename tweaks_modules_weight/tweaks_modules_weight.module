@@ -29,30 +29,30 @@ function tweaks_modules_weight_menu() {
  */
 function tweaks_modules_weight_form_system_modules_alter(&$form, &$form_state, $form_id) {
 
-  $config = config_get('tweaks_modules_weight.settings', 'modules_weight');
+  $modules_weight = config_get('tweaks_modules_weight.settings', 'modules_weight');
 
-  if ($config == 'display') {
+  if ($modules_weight == 'display') {
 
     $modules = system_rebuild_module_data();
 
     foreach (element_children($form['modules']) as $package) {
 
+      // Add weight data to each enabled module.
       foreach (element_children($form['modules'][$package]) as $module) {
-
-        // Add weight data.
         $form['modules'][$package][$module]['weight'] = array(
           '#markup' => !!$modules[$module]->status ? $modules[$module]->weight : '',
         );
       }
 
+      // Replace theme implementation.
       $form['modules'][$package]['#theme'] = 'tweaks_modules_weight_system_modules_fieldset';
-      $form['modules'][$package]['#header'] = array(
-        array('class' => array('checkbox')),
-        t('Name'),
-        array('data' => t('Version'), 'class' => array(RESPONSIVE_PRIORITY_MEDIUM)),
+
+      // Add weight column to table header.
+      $header = $form['modules'][$package]['#header'];
+      $form['modules'][$package]['#header'] = array_merge(
+        array_slice($header, 0, 3),
         array('data' => t('Weight'), 'class' => array(RESPONSIVE_PRIORITY_MEDIUM)),
-        array('data' => t('Description'), 'class' => array(RESPONSIVE_PRIORITY_LOW)),
-        array('data' => t('Operations')),
+        array_slice($header, 3)
       );
     }
   }

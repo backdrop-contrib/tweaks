@@ -2,16 +2,22 @@
 Tweaks
 ======
 
-Provides tweaks to enhance the usability and performance of the website and
-includes following features:
+A collection of small modules to enhance the usability and performance of the
+website and includes following features:
 
-- Collapse groups on the Modules and the Permissions pages.
+- **Collapse Groups**  
+  Allows to collapse groups on the Modules and the Permissions pages.
 
-- Define the path of the language links of the Language Switcher block.
+- **Language Switcher**  
+  Allows to define an alternative path of the language links of the Language
+  Switcher block.
 
-- Display the modules weight on the Modules page.
+- **Log Messages**  
+  Allows auto remove of log messages from the database which are older than a
+  specific time.
 
-- Remove log messages from the database which are older than a specific time.
+- **Modules Weight**  
+  Allows to display the modules weight on the Modules page.
 
 Installation
 ------------
@@ -35,9 +41,9 @@ Credits
 
 Ported to Backdrop CMS by Ralf Stamm (https://github.com/rstamm).
 
-- Collapse groups on the Modules and the Permissions pages:
+- Collapse Groups:  
   Inspired by the Administration Menu module, originally written for Drupal by
   Daniel Kudwien (https://www.drupal.org/u/sun) and many others.
 
-- All other features:
+- All other features:  
   Originally written for Drupal by Ralf Stamm (https://github.com/rstamm).
