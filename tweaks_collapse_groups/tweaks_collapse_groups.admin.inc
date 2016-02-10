@@ -7,7 +7,7 @@
 
 
 /**
- * Form builder; The module groups form.
+ * Form builder; The module groups settings form.
  */
 function tweaks_collapse_groups_settings($form, $form_state) {
 
