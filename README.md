@@ -2,8 +2,10 @@
 Tweaks
 ======
 
-A collection of small modules to enhance the usability and performance of the
-website and includes following features:
+A collection of small modules to enhances the usability and performance of the
+website.
+
+For the moment, it includes the following modules:
 
 - **Collapse Groups**  
   Allows to collapse groups on the Modules and the Permissions pages.
@@ -39,7 +41,7 @@ Current Maintainers
 Credits
 -------
 
-Ported to Backdrop CMS by Ralf Stamm (https://github.com/rstamm).
+- Ported to Backdrop CMS by Ralf Stamm (https://github.com/rstamm).
 
 - Collapse Groups:  
   Inspired by the Administration Menu module, originally written for Drupal by
