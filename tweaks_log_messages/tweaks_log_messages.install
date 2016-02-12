@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the tweaks_log_messages module.
+ */
+
+
+/**
+ * Implements hook_install().
+ */
+function tweaks_log_messages_install() {
+
+  // If remove log messages from the database Log Messages module should run
+  // before Database Logging module.
+  db_update('system')
+    ->fields(array('weight' => -5))
+    ->condition('name', 'tweaks_log_messages')
+    ->condition('type', 'module')
+    ->execute();
+}
+
+
+/**
+ * Implements hook_update_N().
+ */
+
+/**
+ * If remove log messages from the database Log Messages module should run
+ * before Database Logging module.
+ */
+function tweaks_log_messages_update_1100() {
+
+  db_update('system')
+    ->fields(array('weight' => -5))
+    ->condition('name', 'tweaks_log_messages')
+    ->condition('type', 'module')
+    ->execute();
+}
