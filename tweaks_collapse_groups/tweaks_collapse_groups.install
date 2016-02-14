@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the tweaks_collapse_groups module.
+ */
+
+
+/**
+ * Implements hook_update_N().
+ */
+
+/**
+ * Move module settings from variables to config.
+ */
+function tweaks_collapse_groups_update_1000() {
+
+  // Migrate variables to config.
+  $config = config('tweaks_collapse_groups.settings');
+  $config->set('collapse_modules_page', update_variable_get('tweaks_collapse_groups_collapse_modules_page', 0));
+  $config->set('collapse_permissions_page', update_variable_get('tweaks_collapse_groups_collapse_permissions_page', 0));
+  $config->save();
+
+  // Delete variables.
+  update_variable_del('tweaks_collapse_groups_collapse_modules_page');
+  update_variable_del('tweaks_collapse_groups_collapse_permissions_page');
+}
