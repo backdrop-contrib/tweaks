@@ -26,6 +26,23 @@ function tweaks_log_messages_install() {
  */
 
 /**
+ * Move module settings from variables to config.
+ */
+function tweaks_log_messages_update_1000() {
+
+  // Migrate variables to config.
+  $config = config('tweaks_log_messages.settings');
+  $config->set('clear_log_form', update_variable_get('tweaks_log_messages_clear_log_form', 1));
+  $config->set('dblog_row_interval', update_variable_get('tweaks_log_messages_dblog_row_interval', 0));
+  $config->save();
+
+  // Delete variables.
+  update_variable_del('tweaks_log_messages_clear_log_form');
+  update_variable_del('tweaks_log_messages_dblog_row_interval');
+}
+
+
+/**
  * If remove log messages from the database Log Messages module should run
  * before Database Logging module.
  */

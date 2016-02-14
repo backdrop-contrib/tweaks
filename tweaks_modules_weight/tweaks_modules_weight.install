@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the tweaks_modules_weight module.
+ */
+
+
+/**
+ * Implements hook_update_N().
+ */
+
+/**
+ * Move module settings from variables to config.
+ */
+function tweaks_modules_weight_update_1000() {
+
+  // Migrate variables to config.
+  $config = config('tweaks_modules_weight.settings');
+  $config->set('modules_weight', update_variable_get('tweaks_modules_weight_modules_weight', 'none'));
+  $config->save();
+
+  // Delete variables.
+  update_variable_del('tweaks_modules_weight_modules_weight');
+}
