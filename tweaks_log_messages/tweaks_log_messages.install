@@ -11,8 +11,8 @@
  */
 function tweaks_log_messages_install() {
 
-  // If remove log messages from the database Log Messages module should run
-  // before Database Logging module.
+  // If log messages are removed from the database, the Log Messages module
+  // should run before the Database Logging module.
   db_update('system')
     ->fields(array('weight' => -5))
     ->condition('name', 'tweaks_log_messages')
@@ -33,18 +33,17 @@ function tweaks_log_messages_update_1000() {
   // Migrate variables to config.
   $config = config('tweaks_log_messages.settings');
   $config->set('clear_log_form', update_variable_get('tweaks_log_messages_clear_log_form', 1));
-  $config->set('dblog_row_interval', update_variable_get('tweaks_log_messages_dblog_row_interval', 0));
+  $config->set('dblog_row_age', update_variable_get('tweaks_log_messages_dblog_row_age', 0));
   $config->save();
 
   // Delete variables.
   update_variable_del('tweaks_log_messages_clear_log_form');
-  update_variable_del('tweaks_log_messages_dblog_row_interval');
+  update_variable_del('tweaks_log_messages_dblog_row_age');
 }
 
-
 /**
- * If remove log messages from the database Log Messages module should run
- * before Database Logging module.
+ * If log messages are removed from the database, the Log Messages module
+ * should run before the Database Logging module.
  */
 function tweaks_log_messages_update_1100() {
 
@@ -53,4 +52,17 @@ function tweaks_log_messages_update_1100() {
     ->condition('name', 'tweaks_log_messages')
     ->condition('type', 'module')
     ->execute();
+}
+
+/**
+ * Rename config variable 'dblog_row_interval' to 'dblog_row_age'.
+ */
+function tweaks_log_messages_update_1101() {
+
+  $data['clear_log_form'] = config_get('tweaks_log_messages.settings', 'clear_log_form');
+  $data['dblog_row_age'] = config_get('tweaks_log_messages.settings', 'dblog_row_interval');
+
+  $config = config('tweaks_log_messages.settings');
+  $config->setData($data);
+  $config->save();
 }

@@ -1,5 +1,5 @@
 name = Log Messages
-description = Allows to remove log messages from the database which are older than a specific time.
+description = Allows to set a maximum age of log messages to keep in the database log.
 backdrop = 1.x
 package = Tweaks
 type = module

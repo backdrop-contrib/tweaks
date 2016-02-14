@@ -2,8 +2,7 @@
 
 /**
  * @file
- * This module allows to remove log messages from the database which are older
- * than a specific time.
+ * Allows to set a maximum age of log messages to keep in the database log.
  */
 
 
@@ -14,7 +13,7 @@ function tweaks_log_messages_menu() {
 
   $items['admin/config/tweaks/log-messages'] = array(
     'title' => 'Log messages',
-    'description' => 'Allows to remove log messages from the database which are older than a specific time.',
+    'description' => 'Allows to set a maximum age of log messages to keep in the database log.',
     'page callback' => 'backdrop_get_form',
     'page arguments' => array('tweaks_log_messages_settings'),
     'access arguments' => array('administer site configuration'),
@@ -42,12 +41,12 @@ function tweaks_log_messages_form_dblog_clear_log_form_alter(&$form, &$form_stat
  */
 function tweaks_log_messages_cron() {
 
-  $dblog_row_interval = config_get('tweaks_log_messages.settings', 'dblog_row_interval');
+  $dblog_row_age = config_get('tweaks_log_messages.settings', 'dblog_row_age');
 
-  if ($dblog_row_interval > 0) {
+  if ($dblog_row_age > 0) {
 
     db_delete('watchdog')
-      ->condition('timestamp', REQUEST_TIME - $dblog_row_interval, '<')
+      ->condition('timestamp', REQUEST_TIME - $dblog_row_age, '<')
       ->execute();
   }
 }

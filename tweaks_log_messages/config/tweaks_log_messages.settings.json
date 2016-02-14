@@ -1,5 +1,5 @@
 {
     "_config_name": "tweaks_log_messages.settings",
     "clear_log_form": 1,
-    "dblog_row_interval": 0
+    "dblog_row_age": 0
 }
